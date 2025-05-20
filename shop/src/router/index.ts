@@ -1,27 +1,34 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Vue from 'vue'
+import VueRouter, {RouteConfig} from 'vue-router'
+import MainPage from "@/views/MainPage.vue";
+import ProductPage from "@/views/ProductPage.vue";
+import CategoryPage from "@/views/CategoryPage.vue";
+import NotFound from "@/views/NotFound.vue";
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
+  {path: '/', component: MainPage},
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
+    path: '/products/:id',
+    name: "Product",
+    component: ProductPage
+
   },
   {
-    path: "/about",
-    name: "about",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: '/category/:id',
+    name: "Category",
+    component: CategoryPage
+
   },
-];
+  {path: '*', component: NotFound}
+
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router
